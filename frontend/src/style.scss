@@ -1,0 +1,99 @@
+$Green: #10a73d;
+$LightGreen: #0ce04c48;
+
+.app {
+    display: flex;
+    justify-content: center;
+    background: radial-gradient(ellipse at top right, $LightGreen, transparent);
+
+    .container {
+        width: 1024px;
+
+        .link {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        // NAVBAR
+        .navbar {
+            .container {
+                padding: 10px 0px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                .logo{
+                    img {
+                        width: 150px;
+                        mix-blend-mode: multiply;
+                    } 
+                }
+                .links{
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+
+                    h6 {
+                        font-size: 16px;
+                        font-weight: 300;
+                    }
+
+                    span {
+                        cursor: pointer;
+                    }
+
+                    .add {
+                        background-color: $Green;
+                        width: 82px;
+                        height: 82px;
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-weight: 300;
+                        border: 1px solid white;
+
+                        &:hover {
+                        color: teal;
+                        background-color: $LightGreen;
+                        border: 1px solid teal;
+                        }
+
+                        .add-link {
+                            text-decoration: none;
+                            display: flex;
+                            justify-content: center;
+                            flex-direction: column;
+                            text-align: center; 
+                        }
+                    }
+
+                }
+            }
+        }
+
+        // FOOTER
+
+        footer {
+            margin-top: 100px;
+            padding: 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            img {
+                height: 100px;
+                mix-blend-mode: multiply;
+            }
+
+        }
+    }
+}
+
+    
+
+ 
+
+
+
+
