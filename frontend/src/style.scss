@@ -21,6 +21,10 @@ $LightGreen: #0ce04c48;
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
+                h1 {
+                    font-size: 36px;
+                    font-weight: 300;
+                }
                 .logo{
                     img {
                         width: 150px;
@@ -84,6 +88,33 @@ $LightGreen: #0ce04c48;
             img {
                 height: 100px;
                 mix-blend-mode: multiply;
+            }
+
+        }
+
+        // HOME PAGE
+
+        .home {
+            display: flex;
+            
+            .journeys {
+                padding: 50px 0px;
+
+                h1 {
+                    font-size: 36px;
+                    font-weight: 300;
+                }
+
+            }
+
+            .stations {
+                padding: 50px 0px;
+                padding-left: 500px;
+
+                h1 {
+                    font-size: 36px;
+                    font-weight: 300;
+                }
             }
 
         }

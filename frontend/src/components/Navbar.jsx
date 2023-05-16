@@ -9,6 +9,7 @@ const Navbar = () => {
                 <div className="logo">
                     <img src={Logo} alt=""/>
                 </div>
+                <h1>HELSINKI CITY BIKE</h1>
                 <div className="links">                    
                     <Link className="link">
                         <h6>LINKS</h6>
