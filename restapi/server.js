@@ -2,6 +2,7 @@
 
 const mysql = require("mysql");
 const cors = require("cors");
+const express = require("express");
 
 var app = express();
 app.use(express.json()); // for parsing application/json
@@ -34,3 +35,12 @@ app.use(function(req, res, next) {
 });
 
 // **************************** ENDPOINTS *****************************
+
+
+// GET ALL JOURNEYS, LIMIT TO 100 ROWS
+app.get("/journeys", (req, res) => {
+    conn.query("SELECT * FROM journey LIMIT 100", (err, rows) => {
+      if (err) throw err;
+      return res.status(200).json(rows);
+    });
+});
