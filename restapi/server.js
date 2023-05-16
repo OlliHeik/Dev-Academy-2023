@@ -44,3 +44,11 @@ app.get("/journeys", (req, res) => {
       return res.status(200).json(rows);
     });
 });
+
+// GET ALL STATIONS, LIMIT TO 50 ROWS
+app.get("/stations", (req, res) => {
+  conn.query("SELECT * FROM station LIMIT 25", (err, rows) => {
+    if (err) throw err;
+    return res.status(200).json(rows);
+  });
+});
