@@ -37,18 +37,52 @@ app.use(function(req, res, next) {
 // **************************** ENDPOINTS *****************************
 
 
-// GET ALL JOURNEYS, LIMIT TO 100 ROWS
+// GET JOURNEYS
 app.get("/journeys", (req, res) => {
-    conn.query("SELECT * FROM journey LIMIT 100", (err, rows) => {
-      if (err) throw err;
-      return res.status(200).json(rows);
-    });
+  const { _page, _limit } = req.query;
+  const startIndex = (_page - 1) * _limit;
+  
+  // Fetch the journeys from the database with pagination
+  const query = `SELECT * FROM journey LIMIT ${startIndex}, ${_limit}`;
+
+  conn.query(query, (err, results) => {
+    if (err) {
+      res.status(500).json({ error: "Failed to fetch journeys from the database" });
+    } else {
+      // Fetch the total count of journeys
+      conn.query("SELECT COUNT(*) AS totalCount FROM journey", (err, totalCount) => {
+        if (err) {
+          res.status(500).json({ error: "Failed to fetch the total count of journeys" });
+        } else {
+          res.setHeader("X-Total-Count", totalCount[0].totalCount);
+          res.status(200).json(results);
+        }
+      });
+    }
+  });
 });
 
-// GET ALL STATIONS, LIMIT TO 50 ROWS
+// GET STATIONS
 app.get("/stations", (req, res) => {
-  conn.query("SELECT * FROM station LIMIT 25", (err, rows) => {
-    if (err) throw err;
-    return res.status(200).json(rows);
+  const { _page, _limit } = req.query;
+  const startIndex = (_page - 1) * _limit;
+  
+  // Fetch the journeys from the database with pagination
+  const query = `SELECT * FROM station LIMIT ${startIndex}, ${_limit}`;
+
+  conn.query(query, (err, results) => {
+    if (err) {
+      res.status(500).json({ error: "Failed to fetch stations from the database" });
+    } else {
+      // Fetch the total count of journeys
+      conn.query("SELECT COUNT(*) AS totalCount FROM station", (err, totalCount) => {
+        if (err) {
+          res.status(500).json({ error: "Failed to fetch the total count of stations" });
+        } else {
+          res.setHeader("X-Total-Count", totalCount[0].totalCount);
+          res.status(200).json(results);
+        }
+      });
+    }
   });
 });
