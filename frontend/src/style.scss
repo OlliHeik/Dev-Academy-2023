@@ -95,28 +95,132 @@ $LightGreen: #0ce04c48;
         // HOME PAGE
 
         .home {
-            display: flex;
-            
-            .journeys {
-                padding: 50px 0px;
+            h1 {
+                font-size: 50px;
+                font-weight: 300;
+            }
+        }
 
-                h1 {
-                    font-size: 36px;
-                    font-weight: 300;
-                }
+        // JOURNEYS PAGE
 
+        .journeys {
+            margin-top: 50px;
+
+            // TABLE
+
+            th, td {
+                padding: 15px;
+                border: 1px solid #ccc;
             }
 
-            .stations {
-                padding: 50px 0px;
-                padding-left: 500px;
-
-                h1 {
-                    font-size: 36px;
-                    font-weight: 300;
-                }
+            h1 {
+                font-size: 36px;
+                font-weight: 300;
             }
 
+            // PAGINATION
+
+            .paginationBttns {
+                width: 80%;
+                height: 40px;
+                list-style: none;
+                display: flex;
+                justify-content: center;
+            }
+              
+            .paginationBttns a {
+                padding: 10px;
+                margin: 8px;
+                border-radius: 5px;
+                border: 1px solid $Green;
+                color: black;
+                cursor: pointer;
+            }
+              
+            .paginationBttns a:hover {
+                color: black;
+                background-color: $LightGreen;
+            }
+              
+            .paginationActive a {
+                color: black;
+                background-color: $Green;
+            }
+
+        }
+
+        // STATIONS PAGE
+
+        .stations {
+            margin-top: 50px;
+
+            // TABLE
+
+            th, td {
+                padding: 15px;
+                border: 1px solid #ccc;
+            }
+
+            h1 {
+                font-size: 36px;
+                font-weight: 300;
+            }
+
+            // PAGINATION
+
+            .paginationBttns {
+                width: 80%;
+                height: 40px;
+                list-style: none;
+                display: flex;
+                justify-content: center;
+            }
+              
+            .paginationBttns a {
+                padding: 10px;
+                margin: 8px;
+                border-radius: 5px;
+                border: 1px solid $Green;
+                color: black;
+                cursor: pointer;
+            }
+              
+            .paginationBttns a:hover {
+                color: black;
+                background-color: $LightGreen;
+            }
+              
+            .paginationActive a {
+                color: black;
+                background-color: $Green;
+            }
+
+        }  
+
+        // LOADING SPINNER
+
+        @keyframes spinner {
+            0% {
+              transform: rotate(0deg);
+            }
+            100% {
+              transform: rotate(360deg);
+            }
+        }
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 10px solid #f3f3f3; /* Light grey */
+            border-top: 10px solid #383636; /* Blue */
+            border-radius: 50%;
+            animation: spinner 1.5s linear infinite;
+        }
+          
+        .spinner-container {
+            display: grid;
+            justify-content: center;
+            align-items: center;
+            height: 350px;
         }
     }
 }
