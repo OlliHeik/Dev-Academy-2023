@@ -6,8 +6,10 @@ import {
 } from "react-router-dom";
 import Home from "./pages/Home";
 import Journey from "./pages/Journey";
+import Journeys from "./pages/Journeys";
 import AddJourney from "./pages/AddJourney";
 import Station from "./pages/Station";
+import Stations from "./pages/Stations";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -33,12 +35,20 @@ const router = createBrowserRouter([  // Routes
         element: <Home/>,
       },
       {
+        path: "/journeys",
+        element: <Journeys/>,
+      },
+      {
         path: "/journey/:id",
         element: <Journey/>,
       },
       {
         path: "/journey/add",
         element: <AddJourney/>,
+      },
+      {
+        path: "/stations",
+        element: <Stations/>,
       },
       {
         path: "/station/:id",
