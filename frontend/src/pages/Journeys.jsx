@@ -1,42 +1,75 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import moment from "moment";
 import ReactPaginate from "react-paginate";
 import LoadingSpinner from "../components/LoadingSpinner";
 
+const SearchBar = ({ searchTable }) => {  // simple searchbar component
+    const [searchValue, setSearchValue] = useState("");
+    const submitForm = (e) => {
+      e.preventDefault();
+      searchTable(searchValue);
+    };
+    return (
+      <div className="search-bar">
+        <form onSubmit={submitForm}>
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+          />
+        </form>
+      </div>
+    );
+};
+
 const Journeys = () => {
 
     const [journeys, setJourneys] = useState([]);
-    const [stations, setStations] = useState([]);
     const [pageCount, setpageCount] = useState(0);
     const [pageNumber, setpageNumber] = useState(1);
     const [isLoading, setIsLoading] = useState(false);
-    let limit = 10;
+    const [sorting, setSorting] = useState({ column: "idjourney", order: "asc"});
+    const [searchValue, setSearchValue] = useState("");
+    let limit = 10; // limit how many journeys per page
 
+    const isDescSorting = sorting.column && sorting.order === "desc";
+    const isAscSorting = sorting.column && sorting.order === "asc";
+    const futureSortingOrder = isDescSorting ? "asc" : "desc";
+
+    const sortTable = (newSorting) => {  // Update by which column we are sorting and if asc or desc
+        setSorting(newSorting);
+    }
+
+    const searchTable = (newSearchValue) => {  // update search parameters
+        setSearchValue(newSearchValue);
+    }
+
+    // fetch journeys with search and sorting 
     useEffect(() => {
         const getJourneys = async () => {
-          setIsLoading(true);
-          const res = await axios.get(`journeys?_page=1&_limit=${limit}`);
+          setIsLoading(true);  // display loading spinner when fetching data
+          const res = await axios.get(`journeys/search?_page=1&_limit=${limit}&_sort=${sorting.column}&_order=${sorting.order}&name_like=${searchValue}`);
           const total = res.headers.get("x-total-count");
           setpageCount(Math.ceil(total / limit));
           setJourneys(res.data);
-          setIsLoading(false);
+          setIsLoading(false); // set to false to display data
         };
     
         getJourneys();
-    }, [limit]);
+    }, [limit, sorting, searchValue]);  // useEffect runs every time these dependencies change
 
+    // fetch journeys for the current page
     const fetchJourneys = async (currentPage) => {
         setIsLoading(true);
-        const res = await axios.get(`journeys?_page=${currentPage}&_limit=${limit}`);
+        const res = await axios.get(`journeys/search?_page=${currentPage}&_limit=${limit}&_sort=${sorting.column}&_order=${sorting.order}&name_like=${searchValue}`);
         return res.data;
     };
 
     const handlePageClick = async (data) => {
-        console.log(data.selected);
-    
         let currentPage = data.selected + 1;
         setpageNumber(currentPage);
     
@@ -48,19 +81,26 @@ const Journeys = () => {
         window.scrollTo(0, 0)
     };
 
-    const calculateIndex = (currentPage, index) => {
-        return (currentPage - 1) * limit + index + 1;
-    };
-
     return (
         <div className="journeys">
+            <SearchBar searchTable={searchTable} />
             <h1>Journeys</h1>
             <table>
                 <tbody>
-                    <tr>
-                        <th>#</th>
-                        <th>Departure station name</th>
-                        <th>Departure date</th>
+                    <tr className="columns">
+                        <th
+                        onClick={() => sortTable({ column: "idjourney", order: futureSortingOrder})}
+                        > #
+                        {isDescSorting && <span>▼</span>}
+                        {isAscSorting && <span>▲</span>}
+                        </th>
+                        <th
+                        onClick={() => sortTable({ column: "departure_station_name", order: futureSortingOrder})}
+                        > Departure station name 
+                        {isDescSorting && <span>▼</span>}
+                        {isAscSorting && <span>▲</span>}
+                        </th>
+                        <th>Departure date </th>
                         <th>Return station name</th>
                         <th>Return date</th>
                         <th>Distance (kilometres)</th>
@@ -73,12 +113,10 @@ const Journeys = () => {
                         </td>
                     </tr>
                     ) : (
-                    journeys.map((journey, index) => (
+                    journeys.map((journey) => (
                         <tr key={journey.idjourney}>
                             <td>
-                                <Link className="link" to={`/journey/${journey.idjourney}`}>
-                                    {calculateIndex(pageNumber, index)}
-                                </Link>
+                                {journey.idjourney}
                             </td>
                             <td>{journey.departure_station_name}</td>
                             <td>
@@ -99,7 +137,7 @@ const Journeys = () => {
                     )}                
                 </tbody>
             </table>
-
+            
             <ReactPaginate
                 previousLabel={"Previous"}
                 nextLabel={"Next"}
