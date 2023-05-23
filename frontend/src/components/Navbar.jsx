@@ -20,9 +20,8 @@ const Navbar = () => {
                     <Link className="link" to="/stations">
                         <h6>STATIONS</h6>
                     </Link>
-
-                    <span className="add">
-                        <Link className="add-link">ADD JOURNEY</Link>
+                    <span className="addjourney">
+                        <Link className="add-link" to="/journey/add">ADD JOURNEY</Link>
                     </span>
                 </div>
             </div>
