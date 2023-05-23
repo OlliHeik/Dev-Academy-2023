@@ -45,7 +45,7 @@ $LightGreen: #0ce04c48;
                         cursor: pointer;
                     }
 
-                    .add {
+                    .addjourney {
                         background-color: $Green;
                         width: 82px;
                         height: 82px;
@@ -99,6 +99,7 @@ $LightGreen: #0ce04c48;
                 font-size: 50px;
                 font-weight: 300;
             }
+            margin-bottom: 550px;
         }
 
         // JOURNEYS PAGE
@@ -108,9 +109,85 @@ $LightGreen: #0ce04c48;
 
             // TABLE
 
+            .columns {
+                background-color: $Green;    
+            }
+
             th, td {
                 padding: 15px;
                 border: 1px solid #ccc;
+            }
+
+            h1 {
+                font-size: 36px;
+                font-weight: 300;
+            }
+
+            // PAGINATION
+
+            .paginationBttns {
+                width: 80%;
+                height: 40px;
+                list-style: none;
+                display: flex;
+                justify-content: center;
+            }
+              
+            .paginationBttns a {
+                padding: 10px;
+                margin: 8px;
+                border-radius: 5px;
+                border: 1px solid $Green;
+                color: black;
+                cursor: pointer;
+            }
+              
+            .paginationBttns a:hover {
+                color: black;
+                background-color: $LightGreen;
+            }
+              
+            .paginationActive a {
+                color: black;
+                background-color: $Green;
+            }
+
+
+        }
+
+        // STATIONS PAGE
+
+        .stations {
+            margin-top: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+
+            // TABLE
+
+            .columns {
+                background-color: $Green;    
+            }
+
+            .id {
+                background-color: $Green;
+                &:hover {
+                    color: teal;
+                    background-color: $LightGreen;
+                    border: 1px solid teal;
+                }
+
+                .link {
+                    font-size: 20px;
+                }
+            }
+
+            th, td {
+                padding: 15px;
+                border: 1px solid #ccc;
+                
             }
 
             h1 {
@@ -149,53 +226,22 @@ $LightGreen: #0ce04c48;
 
         }
 
-        // STATIONS PAGE
+        // SINGLE STATION VIEW
 
-        .stations {
-            margin-top: 50px;
-
-            // TABLE
-
-            th, td {
-                padding: 15px;
-                border: 1px solid #ccc;
-            }
+        .station {
+            display:flex;
+            align-items: center;
+            justify-content: space-between;
 
             h1 {
-                font-size: 36px;
+                font-size: 30px;
                 font-weight: 300;
             }
 
-            // PAGINATION
-
-            .paginationBttns {
-                width: 80%;
-                height: 40px;
-                list-style: none;
-                display: flex;
-                justify-content: center;
+            .map {
+                padding-left: 0px;
             }
-              
-            .paginationBttns a {
-                padding: 10px;
-                margin: 8px;
-                border-radius: 5px;
-                border: 1px solid $Green;
-                color: black;
-                cursor: pointer;
-            }
-              
-            .paginationBttns a:hover {
-                color: black;
-                background-color: $LightGreen;
-            }
-              
-            .paginationActive a {
-                color: black;
-                background-color: $Green;
-            }
-
-        }  
+        }
 
         // LOADING SPINNER
 
@@ -221,6 +267,53 @@ $LightGreen: #0ce04c48;
             justify-content: center;
             align-items: center;
             height: 350px;
+        }
+
+        // ADD JOURNEY PAGE
+
+        .add {
+            padding: 20px;
+            margin-bottom: 180px;
+            
+            h1 {
+              font-size: 24px;
+              font-weight: 300;
+              margin-bottom: 20px;
+            }
+            
+            .content {
+              margin-bottom: 10px;
+              
+              input[type="datetime-local"],
+              select,
+              input[type="number"] {
+                width: 100%;
+                padding: 8px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+              }
+              
+              select {
+                height: 34px;
+              }
+            }
+            
+            .button {
+              text-align: right;
+              
+              button {
+                padding: 10px 20px;
+                background-color: #4caf50;
+                color: #fff;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                
+                &:hover {
+                  background-color: #45a049;
+                }
+              }
+            }
         }
     }
 }
