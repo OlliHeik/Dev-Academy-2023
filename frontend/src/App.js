@@ -5,7 +5,6 @@ import {
   Outlet,
 } from "react-router-dom";
 import Home from "./pages/Home";
-import Journey from "./pages/Journey";
 import Journeys from "./pages/Journeys";
 import AddJourney from "./pages/AddJourney";
 import Station from "./pages/Station";
@@ -37,10 +36,6 @@ const router = createBrowserRouter([  // Routes
       {
         path: "/journeys",
         element: <Journeys/>,
-      },
-      {
-        path: "/journey/:id",
-        element: <Journey/>,
       },
       {
         path: "/journey/add",
