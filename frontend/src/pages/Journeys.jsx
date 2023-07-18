@@ -1,6 +1,5 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import moment from "moment";
 import ReactPaginate from "react-paginate";
@@ -30,7 +29,7 @@ const Journeys = () => {
 
     const [journeys, setJourneys] = useState([]);
     const [pageCount, setpageCount] = useState(0);
-    const [pageNumber, setpageNumber] = useState(1);
+    const [,setpageNumber] = useState(1);
     const [isLoading, setIsLoading] = useState(false);
     const [sorting, setSorting] = useState({ column: "idjourney", order: "asc"});
     const [searchValue, setSearchValue] = useState("");
